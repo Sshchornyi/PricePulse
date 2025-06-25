@@ -3,7 +3,7 @@ from airflow.operators.python import PythonOperator
 from datetime import datetime
 from scripts.bronze import scrape_flowers
 from scripts.silver import transform_to_silver
-from scripts.gold import transform_to_gold
+from scripts.gold import create_views
 
 default_args = {
     "owner": "airflow",
@@ -29,10 +29,9 @@ with DAG(
         python_callable=transform_to_silver,
     )
 
-    # gold = PythonOperator(
-    #     task_id="gold_layer",
-    #     python_callable=transform_to_gold,
-    # )
+    gold = PythonOperator(
+        task_id="gold_layer",
+        python_callable=create_views(),
+    )
 
-    bronze >> silver
-    # >> gold
+    bronze >> silver >> gold
