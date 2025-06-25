@@ -29,9 +29,10 @@ with DAG(
         python_callable=transform_to_silver,
     )
 
-    gold = PythonOperator(
-        task_id="gold_layer",
-        python_callable=transform_to_gold,
-    )
+    # gold = PythonOperator(
+    #     task_id="gold_layer",
+    #     python_callable=transform_to_gold,
+    # )
 
-    bronze >> silver >> gold
+    bronze >> silver
+    # >> gold

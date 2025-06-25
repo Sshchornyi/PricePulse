@@ -1,6 +1,6 @@
 .idea/
 .venv/
 data/
-.env
+python/.env
 tests.py
 
