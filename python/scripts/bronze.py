@@ -98,7 +98,7 @@ def scrape_flowers():
 
 
     # Save data to a JSON file
-    data_dir = Path(__file__).resolve().parent.parent / 'data' / 'bronze'
+    data_dir = Path(__file__).resolve().parent.parent / 'python' / 'scripts'/ 'data' / 'bronze'
     os.makedirs(data_dir, exist_ok=True)
 
     current_date = datetime.date.today().strftime('%Y%m%d')
