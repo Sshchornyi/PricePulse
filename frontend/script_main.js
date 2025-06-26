@@ -59,7 +59,8 @@ async function loadPriceHistoryForProducts(productsToLoad) {
         if (!response.ok) {
           throw new Error(`HTTP error! Status: ${response.status}`);
         }
-        priceHistory[product.product_id] = await response.json();
+        const data = await response.json();
+        priceHistory[product.product_id] = data; // Зберігаємо дані як є
         console.log(`Price history for ${product.product_id}:`, priceHistory[product.product_id]);
       } catch (error) {
         console.error(`Error in fetchPriceHistory for ${product.product_id}:`, error);
@@ -118,6 +119,7 @@ function displayProducts() {
       }
 
       const history = priceHistory[product.product_id] || [];
+      console.log(`History for ${product.product_id}:`, history); // Додатковий лог
       const latestPrice = history.length > 0 ? history[0].price_uah : '---';
 
       const card = document.createElement('div');
@@ -141,7 +143,7 @@ function displayProducts() {
       });
 
       container.appendChild(card);
-      const chart = createChart(`chart-${product.product_id}`, history, history.length > 0);
+      const chart = createChart(`chart-${product.product_id}`, history, false); // Явно false для карток
       if (chart) charts[`chart-${product.product_id}`] = chart;
 
       if (isSelectionMode) {
@@ -219,7 +221,7 @@ function openProductModal(product) {
   if (charts['modalChart']) {
     charts['modalChart'].destroy();
   }
-  const chart = createChart('modalChart', history, history.length > 0);
+  const chart = createChart('modalChart', history, true); // Явно true для модального вікна
   if (chart) charts['modalChart'] = chart;
 }
 
