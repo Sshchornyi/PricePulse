@@ -2,5 +2,5 @@
 .venv/
 data/
 python/.env
-python/tests.py
+python/scripts/tests.py
 

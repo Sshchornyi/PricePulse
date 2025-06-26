@@ -25,7 +25,7 @@ def transform_to_silver():
     # Path to json from bronze layer
     current_date = date.today().strftime("%Y%m%d")
 
-    bronze_path = Path(__file__).resolve().parent.parent / 'data' / 'bronze' / f'flowers_data_{current_date}.json'
+    bronze_path = Path(__file__).resolve().parent.parent.parent / 'data' / 'bronze' / f'flowers_data_{current_date}.json'
 
     with open(bronze_path, 'r', encoding='utf-8') as f:
         data = json.load(f)
